@@ -2,9 +2,16 @@ import { getDateWithDelta } from "./date-utils.js";
 import { renderSearchFormBlock } from "./search-form.js";
 import { renderSearchStubBlock } from "./search-results.js";
 import { renderUserBlock } from "./user.js";
+import { getFavoritesAmount, getUserData } from "./user-data.js";
 // import { renderToast } from "./lib.js";
 
 window.addEventListener("DOMContentLoaded", () => {
+  const user = getUserData();
+  const favoritesAmount = getFavoritesAmount();
+
+  console.log("User: ", user);
+  console.log("Favorites Amount: ", favoritesAmount);
+
   renderUserBlock("Wade Warren", "img/avatar.png", 0);
   renderSearchFormBlock(
     getDateWithDelta(new Date(), 10),
