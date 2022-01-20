@@ -1,41 +1,17 @@
 import { renderBlock } from "./lib.js";
+import {
+  getLastDayOfNextMonth,
+  formatDate,
+  getMinDefaultDate,
+  getMaxDefaultDate,
+} from "./date-utils.js";
 
-const formatDate = (year: number, month: number, day: number) => {
-  const date = new Date(year, month, day);
-  return `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(
-    -2
-  )}-${date.getDate()}`;
-};
+export function renderSearchFormBlock(dateIn: Date, dateOut: Date): void {
+  const minDate = formatDate(new Date());
+  const maxDate = formatDate(getLastDayOfNextMonth(new Date()));
 
-export function renderSearchFormBlock(dateIn: string, dateOut: string) {
-  const currentDate = new Date();
-  const minDate = formatDate(
-    currentDate.getFullYear(),
-    currentDate.getMonth(),
-    currentDate.getDate()
-  );
-  const maxDate = formatDate(
-    currentDate.getFullYear(),
-    currentDate.getMonth() + 2,
-    0
-  );
-
-  const minDefaultDate =
-    minDate <= dateIn && dateIn <= maxDate && dateIn <= dateOut
-      ? dateIn
-      : formatDate(
-          currentDate.getFullYear(),
-          currentDate.getMonth(),
-          currentDate.getDate() + 1
-        );
-  const maxDefaultDate =
-    minDate <= dateOut && dateOut <= maxDate && dateIn <= dateOut
-      ? dateOut
-      : formatDate(
-          currentDate.getFullYear(),
-          currentDate.getMonth(),
-          currentDate.getDate() + 3
-        );
+  const minDateDefault = formatDate(getMinDefaultDate(dateIn));
+  const maxDateDefault = formatDate(getMaxDefaultDate(dateIn, dateOut));
 
   renderBlock(
     "search-form-block",
@@ -56,11 +32,11 @@ export function renderSearchFormBlock(dateIn: string, dateOut: string) {
         <div class="row">
           <div>
             <label for="check-in-date">Дата заезда</label>
-            <input id="check-in-date" type="date" value="${minDefaultDate}" min="${minDate}" max="${maxDate}" name="checkin" />
+            <input id="check-in-date" type="date" value="${minDateDefault}" min="${minDate}" max="${maxDate}" name="checkin" />
           </div>
           <div>
             <label for="check-out-date">Дата выезда</label>
-            <input id="check-out-date" type="date" value="${maxDefaultDate}" min="${minDate}" max="${maxDate}" name="checkout" />
+            <input id="check-out-date" type="date" value="${maxDateDefault}" min="${minDate}" max="${maxDate}" name="checkout" />
           </div>
           <div>
             <label for="max-price">Макс. цена суток</label>

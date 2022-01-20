@@ -1,3 +1,4 @@
+import { getDateWithDelta } from "./date-utils.js";
 import { renderSearchFormBlock } from "./search-form.js";
 import { renderSearchStubBlock } from "./search-results.js";
 import { renderUserBlock } from "./user.js";
@@ -5,7 +6,10 @@ import { renderUserBlock } from "./user.js";
 
 window.addEventListener("DOMContentLoaded", () => {
   renderUserBlock("Wade Warren", "img/avatar.png", 0);
-  renderSearchFormBlock("2022-01-15", "2022-02-22");
+  renderSearchFormBlock(
+    getDateWithDelta(new Date(), 10),
+    getDateWithDelta(new Date(), 5)
+  );
   renderSearchStubBlock();
   // renderToast(
   //   {
