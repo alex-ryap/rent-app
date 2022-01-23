@@ -5,6 +5,7 @@ import {
   getMinDefaultDate,
   getMaxDefaultDate,
 } from "./date-utils.js";
+import { handlerSearchForm } from "./search-utils.js";
 
 export function renderSearchFormBlock(dateIn: Date, dateOut: Date): void {
   const minDate = formatDate(new Date());
@@ -16,7 +17,7 @@ export function renderSearchFormBlock(dateIn: Date, dateOut: Date): void {
   renderBlock(
     "search-form-block",
     `
-    <form>
+    <form class="search-form">
       <fieldset class="search-filedset">
         <div class="row">
           <div>
@@ -43,11 +44,14 @@ export function renderSearchFormBlock(dateIn: Date, dateOut: Date): void {
             <input id="max-price" type="text" value="" name="price" class="max-price" />
           </div>
           <div>
-            <div><button>Найти</button></div>
+            <div><button type="submit">Найти</button></div>
           </div>
         </div>
       </fieldset>
     </form>
     `
   );
+
+  const searchForm = document.querySelector(".search-form");
+  searchForm.addEventListener("click", handlerSearchForm);
 }
