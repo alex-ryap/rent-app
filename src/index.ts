@@ -2,15 +2,18 @@ import { getDateWithDelta } from "./date-utils.js";
 import { renderSearchFormBlock } from "./search-form.js";
 import { renderSearchStubBlock } from "./search-results.js";
 import { renderUserBlock } from "./user.js";
-import { getFavoritesAmount, getUserData } from "./user-data.js";
+import { getTodosByCount } from "./todos.js";
+// import { getFavoritesAmount, getUserData } from "./user-data.js";
 // import { renderToast } from "./lib.js";
 
 window.addEventListener("DOMContentLoaded", () => {
-  const user = getUserData();
-  const favoritesAmount = getFavoritesAmount();
+  // const user = getUserData();
+  // const favoritesAmount = getFavoritesAmount();
 
-  console.log("User: ", user);
-  console.log("Favorites Amount: ", favoritesAmount);
+  // console.log("User: ", user);
+  // console.log("Favorites Amount: ", favoritesAmount);
+
+  getTodosByCount(2);
 
   renderUserBlock("Wade Warren", "img/avatar.png", 0);
   renderSearchFormBlock(
