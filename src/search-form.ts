@@ -53,5 +53,5 @@ export function renderSearchFormBlock(dateIn: Date, dateOut: Date): void {
   );
 
   const searchForm = document.querySelector(".search-form");
-  searchForm.addEventListener("click", handlerSearchForm);
+  searchForm.addEventListener("submit", handlerSearchForm);
 }
