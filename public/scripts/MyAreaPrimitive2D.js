@@ -1,0 +1,7 @@
+import { MyGraphicsPrimitive2D } from "./MyGraphicsPrimitive2D.js";
+/**
+ * Abstract class MyAreaPrimitive2D extends from abstract class MyGraphicsPrimitive2D
+ * square - readonly property
+ */
+export class MyAreaPrimitive2D extends MyGraphicsPrimitive2D {
+}
