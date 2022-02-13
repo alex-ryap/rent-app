@@ -1,17 +1,26 @@
-import { MyCircle } from "./MyCircle.js";
-import { MyRectangle } from "./MyRectangle.js";
+import { Book } from "./book.js";
+import { books } from "./book-collection.js";
 
-const circle = new MyCircle(10, 10, 50);
-const rectangle = new MyRectangle(10, 10, 100, 50);
+function findSuitableBook(
+  genre: string,
+  pagesLimit: number,
+  multipleRecommendations = true
+): Book | Book[] {
+  const findAlgorithm = (book: Book) => {
+    return book.genre === genre && book.pagesAmount <= pagesLimit;
+  };
 
-console.log(circle.area);
-console.log(rectangle.area);
+  if (multipleRecommendations) {
+    return books.filter(findAlgorithm);
+  } else {
+    return books.find(findAlgorithm) ?? [];
+  }
+}
 
-console.log(circle.square);
-console.log(rectangle.square);
+const recommendedBook = findSuitableBook("fantasy", 1000);
 
-circle.move(20, 10);
-rectangle.move(10, 30);
-
-console.log(circle.area);
-console.log(rectangle.area);
+if (recommendedBook instanceof Book) {
+  console.log(recommendedBook.name);
+} else {
+  console.log(recommendedBook[0]?.name);
+}
